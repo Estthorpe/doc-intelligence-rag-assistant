@@ -1,0 +1,53 @@
+# Virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyc
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Environment variables — NEVER commit actual keys
+.env
+
+# Data — raw documents and vector store
+data/raw/
+data/processed/
+chroma_db/
+
+# pgvector / Docker volumes (managed by Docker)
+pgvector_data/
+
+# Logs
+logs/*.jsonl
+logs/*.log
+
+# Model cache (sentence-transformers downloads here)
+.cache/
+models/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# RAGAS report (committed manually, not auto-generated)
+# docs/ragas_report.json  ← intentionally NOT ignored

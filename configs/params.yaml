@@ -1,0 +1,25 @@
+chunking:
+  chunk_size: 500
+  chunk_overlap: 50
+  max_chunk_tokens: 600
+  min_chunk_tokens: 10
+
+retrieval:
+  top_k: 20
+  rerank_top_n: 5
+  hyde_enabled: false
+
+cache:
+  similarity_threshold: 0.92
+  max_cache_entries: 1000
+
+agent:
+  confidence_threshold: 0.7
+  escalation_enabled: true
+
+evaluation:
+  faithfulness_gate: 0.85
+  answer_relevancy_gate: 0.80
+  context_recall_gate: 0.70
+  context_precision_gate: 0.70
+  golden_set_path: configs/golden_set.yaml

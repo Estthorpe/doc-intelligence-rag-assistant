@@ -1,0 +1,16 @@
+# Force LF line endings for shell scripts (prevents CRLF breaking Linux containers)
+*.sh text eol=lf
+
+# Force LF for Python files
+*.py text eol=lf
+
+# Force LF for YAML and config files
+*.yaml text eol=lf
+*.yml  text eol=lf
+*.toml text eol=lf
+
+# Binary files — no line ending conversion
+*.pdf    binary
+*.png    binary
+*.jpg    binary
+*.joblib binary
