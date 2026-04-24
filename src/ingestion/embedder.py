@@ -73,7 +73,7 @@ def embed_chunks(chunks: list[DocumentChunk]) -> list[tuple[DocumentChunk, list[
 
             elapsed_time = time.perf_counter() - start_time
 
-            for chunk, embedding in zip(batch, embeddings):
+            for chunk, embedding in zip(batch, embeddings, strict=False):
                 results.append((chunk, embedding.tolist()))
 
             trace.update(

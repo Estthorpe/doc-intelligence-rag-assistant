@@ -6,6 +6,7 @@ A chunk that fails these contracts never reaches pgvector.
 """
 
 import pytest
+
 from src.ingestion.contracts import DocumentChunk, DocumentMetadata
 
 

@@ -8,9 +8,8 @@ These contracts make every failure explicit and traceable.
 
 from __future__ import annotations
 
-from datetime import datetime
-from typing import Optional
 import uuid
+from datetime import datetime
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -73,6 +72,6 @@ class DocumentMetadata(BaseModel):
     filename: str
     file_path: str
     file_type: str = Field(..., pattern=r"^(pdf|txt|md)$")
-    page_count: Optional[int] = None
+    page_count: int | None = None
     ingested_at: datetime = Field(default_factory=datetime.utcnow)
-    total_chunks: Optional[int] = None
+    total_chunks: int | None = None
