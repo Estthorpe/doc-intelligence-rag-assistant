@@ -50,7 +50,7 @@ def embed_query(query: str) -> list[float]:
     Uses normalize_embeddings=True to match ingestion behaviour.
     Cosine similarity requires normalised vectors.
     """
-    model = _get_model()
+    model = get_embedding_model()
     embedding = model.encode(
         [query],
         normalize_embeddings=True,
