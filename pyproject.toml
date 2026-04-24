@@ -57,6 +57,12 @@ module = [
     "src.ingestion.chunker",
     "src.ingestion.embedder",
     "src.ingestion.indexer",
+    "src.retrieval.dense",
+    "src.retrieval.sparse",
+    "src.retrieval.hybrid",
+    "src.retrieval.reranker",
+    "src.retrieval.pipeline",
+    "src.serving.guardrails",
 ]
 ignore_errors = true
 

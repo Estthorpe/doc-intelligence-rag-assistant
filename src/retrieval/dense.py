@@ -19,9 +19,10 @@ import psycopg2
 
 from src.config.logging_config import get_logger
 from src.config.settings import settings
-from src.ingestion.embedder import _get_model
+from src.ingestion.embedder import _get_model as get_embedding_model
 
 logger = get_logger(__name__)
+model = get_embedding_model()
 
 
 @dataclass
