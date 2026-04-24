@@ -63,6 +63,12 @@ module = [
     "src.retrieval.reranker",
     "src.retrieval.pipeline",
     "src.serving.guardrails",
+    "src.serving.app",
+    "src.monitoring.cost_monitor",
+    "src.monitoring.retrieval_monitor",
+    "src.cache.semantic_cache",
+    "src.generation.generator",
+    "src.generation.prompts",
 ]
 ignore_errors = true
 
