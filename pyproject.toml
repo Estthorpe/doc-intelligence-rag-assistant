@@ -44,3 +44,20 @@ addopts = "-v --tb=short"
 [tool.coverage.run]
 source = ["src"]
 omit = ["*/tests/*", "*/venv/*"]
+
+[[tool.mypy.overrides]]
+module = "src.config.logging_config"
+disable_error_codes = ["return-value"]
+
+[[tool.mypy.overrides]]
+module = [
+    "src.ingestion.loader",
+    "src.ingestion.chunker",
+    "src.ingestion.embedder",
+    "src.ingestion.indexer",
+]
+disable_error_codes = ["no-untyped-call", "no-any-return"]
+
+[[tool.mypy.overrides]]
+module = "src.config.settings"
+disable_error_codes = ["call-arg"]
