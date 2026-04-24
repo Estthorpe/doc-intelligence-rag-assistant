@@ -1,5 +1,11 @@
+# src/config/logging_config.py
 """
-Structured logging using loguru
+Structured logging using loguru.
+
+Usage anywhere in the codebase:
+    from src.config.logging_config import get_logger
+    logger = get_logger(__name__)
+    logger.info("Processing document: {path}", path=file_path)
 """
 
 from __future__ import annotations
@@ -7,10 +13,11 @@ from __future__ import annotations
 import sys
 
 from loguru import logger
+from loguru._logger import Logger
 
 
 def configure_logging(log_level: str = "INFO") -> None:
-    """Configure loguru. Called once at startup"""
+    """Configure loguru. Called once at startup."""
     logger.remove()
 
     logger.add(
@@ -25,7 +32,6 @@ def configure_logging(log_level: str = "INFO") -> None:
         colorize=True,
     )
 
-    # File — plain structured logs, rotated daily
     logger.add(
         "logs/app_{time:YYYY-MM-DD}.log",
         level="DEBUG",
@@ -36,7 +42,7 @@ def configure_logging(log_level: str = "INFO") -> None:
     )
 
 
-def get_logger(name: str) -> logger:  # type: ignore[valid-type]
+def get_logger(name: str) -> Logger:
     """Get a named logger. Pass __name__ from the calling module."""
     return logger.bind(module=name)
 

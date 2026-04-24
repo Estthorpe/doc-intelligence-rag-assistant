@@ -1,4 +1,7 @@
-"""Document chunking pipeline
+# src/ingestion/chunker.py
+"""
+Document chunking pipeline.
+
 chunk_size=500 tokens: small enough for precise embeddings,
     large enough for a meaningful answer. 2000-token chunks produce
     noisy embeddings where only 20 tokens may be relevant to a query.
@@ -14,6 +17,7 @@ from __future__ import annotations
 
 import uuid
 from pathlib import Path
+from typing import Any
 
 import tiktoken
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -36,16 +40,27 @@ def chunk_document(
     text: str,
     source_doc_id: str,
     source_path: str,
-    metadata: dict | None = None,
+    metadata: dict[str, Any] | None = None,
 ) -> list[DocumentChunk]:
     """
-    Split a document into validated chunks ready for embedding
+    Split a document into validated chunks ready for embedding.
+
     Processing order:
-    1.  Check for empty input, return early if nothing to chunk
-    2. Split with REcursiveCharacterTextSplitter
+    1. Check for empty input — return early if nothing to chunk
+    2. Split with RecursiveCharacterTextSplitter (token-based)
     3. Validate every raw chunk against DocumentChunk contract
     4. Discard invalid chunks with a warning log
-    5. Return only valid chunks.
+    5. Return only valid chunks
+
+    Args:
+        text:          Raw document text from loader.py.
+        source_doc_id: ID of the parent document (for citations).
+        source_path:   Original file path (for citations).
+        metadata:      Optional additional metadata.
+
+    Returns:
+        List of validated DocumentChunk objects.
+        May be empty if all chunks fail validation.
     """
     if not text or not text.strip():
         logger.warning(f"Empty document provided: {source_path}. Skipping.")
@@ -60,6 +75,7 @@ def chunk_document(
 
     raw_chunks = splitter.split_text(text)
     logger.info(f"Split '{Path(source_path).name}' into {len(raw_chunks)} raw chunks")
+
     validated: list[DocumentChunk] = []
     discarded = 0
 
@@ -79,10 +95,11 @@ def chunk_document(
         except ValueError as e:
             logger.warning(
                 f"Chunk {i} from '{Path(source_path).name}' "
-                f"failed contract: {e}"
-                f"(tokens={token_count}) - discarding"
+                f"failed contract: {e} "
+                f"(tokens={token_count}) — discarding"
             )
             discarded += 1
+
     logger.info(
         f"Chunking complete for '{Path(source_path).name}': "
         f"{len(validated)} valid chunks, {discarded} discarded"

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import uuid
 from datetime import datetime
+from typing import Any
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -36,7 +37,7 @@ class DocumentChunk(BaseModel):
     chunk_index: int = Field(..., ge=0)
     token_count: int = Field(..., gt=0)
     ingested_at: datetime = Field(default_factory=datetime.utcnow)
-    metadata: dict = Field(default_factory=dict)
+    metadata: dict[str, Any] = Field(default_factory=dict)
 
     @field_validator("content")
     @classmethod
