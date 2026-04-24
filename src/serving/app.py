@@ -20,6 +20,7 @@ Every /ask request:
 from __future__ import annotations
 
 import json
+import math
 import time
 from collections.abc import AsyncIterator
 from pathlib import Path
@@ -35,7 +36,7 @@ from src.cache.semantic_cache import SemanticCache
 from src.config.logging_config import get_logger
 from src.config.settings import settings
 from src.generation.generator import stream_response
-from src.monitoring.cost_monitor import get_total_spend
+from src.monitoring.cost_monitor import get_total_spend, log_api_call
 from src.retrieval.dense import RetrievedChunk
 from src.retrieval.pipeline import retrieve
 from src.serving.guardrails import GuardrailPipeline
@@ -73,6 +74,22 @@ _langfuse = Langfuse(
 _total_requests = 0
 _cache_hits = 0
 _total_latency_ms = 0.0
+
+
+def _normalise_confidence(raw_score: float) -> float:
+    """
+    Normalise a cross-encoder score to the 0.0–1.0 range using sigmoid.
+
+    Cross-encoder scores are unbounded — they can be negative or greater
+    than 1. Sigmoid maps any real number to (0, 1):
+        sigmoid(0)  = 0.50  (neutral relevance)
+        sigmoid(2)  = 0.88  (high relevance)
+        sigmoid(-2) = 0.12  (low relevance)
+
+    This ensures the confidence percentage displayed in the UI is always
+    between 0% and 100%.
+    """
+    return round(1.0 / (1.0 + math.exp(-raw_score)), 4)
 
 
 @app.get("/health", response_model=HealthResponse)
@@ -144,7 +161,8 @@ async def ask(request: AskRequest) -> StreamingResponse:
     Returns a Server-Sent Events stream.
     Each event: data: {"token": "..."}\n\n
     Final event: data: {"done": true, "answer": "...", "citations": [...],
-                         "confidence": 0.0, "cost_usd": 0.0, "cached": false}\n\n
+                         "confidence": 0.85, "cost_usd": 0.0012,
+                         "cached": false, "latency_ms": 1200.0}\n\n
     """
 
     async def generate() -> AsyncIterator[str]:
@@ -172,7 +190,7 @@ async def ask(request: AskRequest) -> StreamingResponse:
             citations = cached.get("citations", [])
 
             yield f"data: {json.dumps({'token': answer})}\n\n"
-            yield f"data: {json.dumps({'done': True, 'cached': True, 'answer': answer, 'citations': citations, 'confidence': 0.9, 'cost_usd': 0.0, 'latency_ms': latency})}\n\n"
+            yield f"data: {json.dumps({'done': True, 'cached': True, 'answer': answer, 'citations': citations, 'confidence': 0.9, 'cost_usd': 0.0, 'latency_ms': round(latency, 2)})}\n\n"
             return
 
         # ── Step 3: Retrieval ───────────────────────────────────────
@@ -188,7 +206,7 @@ async def ask(request: AskRequest) -> StreamingResponse:
             full_answer += token
             yield f"data: {json.dumps({'token': token})}\n\n"
 
-        # ── Step 5: Final event ─────────────────────────────────────
+        # ── Step 5: Build final event ───────────────────────────────
         latency = (time.perf_counter() - start_time) * 1000
         _total_latency_ms += latency
 
@@ -201,15 +219,25 @@ async def ask(request: AskRequest) -> StreamingResponse:
             for c in chunks
         ]
 
-        confidence = float(chunks[0].rerank_score) if chunks and chunks[0].rerank_score else 0.75
+        # Normalise cross-encoder score to 0-1 using sigmoid
+        # Raw cross-encoder scores are unbounded — sigmoid prevents
+        # negative or >100% confidence values in the UI
+        raw_confidence = float(chunks[0].rerank_score) if chunks and chunks[0].rerank_score else 0.0
+        confidence = _normalise_confidence(raw_confidence)
 
-        # ── Step 6: Update cache ────────────────────────────────────
+        # Read actual cost from the cost monitor log
+        # (log_api_call was called inside stream_response)
+        actual_cost = get_total_spend()
+
+        # ── Step 6: Update semantic cache ───────────────────────────
         _cache.set(
             query=clean_query,
             answer=full_answer,
             citations=citations,
         )
 
-        yield f"data: {json.dumps({'done': True, 'cached': False, 'answer': full_answer, 'citations': citations, 'confidence': confidence, 'cost_usd': 0.0, 'latency_ms': latency})}\n\n"
+        yield (
+            f"data: {json.dumps({'done': True, 'cached': False, 'answer': full_answer, 'citations': citations, 'confidence': confidence, 'cost_usd': actual_cost, 'latency_ms': round(latency, 2)})}\n\n"
+        )
 
     return StreamingResponse(generate(), media_type="text/event-stream")
