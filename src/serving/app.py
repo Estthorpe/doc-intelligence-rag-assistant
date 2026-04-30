@@ -36,7 +36,7 @@ from src.cache.semantic_cache import SemanticCache
 from src.config.logging_config import get_logger
 from src.config.settings import settings
 from src.generation.generator import stream_response
-from src.monitoring.cost_monitor import get_total_spend, log_api_call
+from src.monitoring.cost_monitor import get_total_spend
 from src.retrieval.dense import RetrievedChunk
 from src.retrieval.pipeline import retrieve
 from src.serving.guardrails import GuardrailPipeline
