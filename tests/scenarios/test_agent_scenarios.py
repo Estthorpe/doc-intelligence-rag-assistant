@@ -11,8 +11,6 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 from src.agents.knowledge_ops_agent import KnowledgeOpsAgent
 from src.agents.schemas import AgentState
 from src.retrieval.dense import RetrievedChunk
