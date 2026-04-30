@@ -70,6 +70,7 @@ module = [
     "src.generation.generator",
     "src.generation.prompts",
     "src.ui.streamlit_app",
+    "src.evaluation.ragas_runner",
 ]
 ignore_errors = true
 
