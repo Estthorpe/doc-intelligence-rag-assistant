@@ -1,0 +1,10 @@
+{
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9374012837702628,
+  "context_recall": 1.0,
+  "context_precision": 0.99999999998,
+  "evaluated_at": "2026-04-30T17:28:08.606180+00:00",
+  "sample_size": 5,
+  "gate_faithfulness": 0.85,
+  "gate_passed": true
+}

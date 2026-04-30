@@ -1,0 +1,192 @@
+# configs/golden_set.yaml
+# 30 Q&A pairs built manually from the contract corpus.
+# ground_truth_answer: the correct answer from the document
+# ground_truth_context: the exact text in the document that contains the answer
+# source_doc_id: which contract type contains this answer
+
+questions:
+
+  # ── SOFTWARE LICENSE contracts ─────────────────────────────────────
+  - id: "q001"
+    question: "What is the scope of the license granted in the software license agreement?"
+    ground_truth_answer: "A non-exclusive, non-transferable license to use the Software solely for internal business purposes."
+    ground_truth_context: "Subject to the terms of this Agreement, Licensor grants Licensee a non-exclusive, non-transferable license to use the Software solely for internal business purposes."
+    contract_type: "SOFTWARE_LICENSE"
+
+  - id: "q002"
+    question: "Can the licensee reverse engineer the software?"
+    ground_truth_answer: "No. The licensee is explicitly prohibited from reverse engineering or decompiling the software."
+    ground_truth_context: "Licensee shall not: (a) copy, modify, or distribute the Software; (b) reverse engineer or decompile the Software."
+    contract_type: "SOFTWARE_LICENSE"
+
+  - id: "q003"
+    question: "Who owns the intellectual property in the software?"
+    ground_truth_answer: "The Licensor owns all intellectual property. No title is transferred to the Licensee."
+    ground_truth_context: "The Software and all copies are proprietary to Licensor. All rights not specifically granted are reserved. Licensee acknowledges that no title to intellectual property in the Software is transferred to Licensee."
+    contract_type: "SOFTWARE_LICENSE"
+
+  - id: "q004"
+    question: "How long do confidentiality obligations last after termination of the software license?"
+    ground_truth_answer: "Five years after termination."
+    ground_truth_context: "Neither party shall disclose Confidential Information to third parties without prior written consent. This obligation survives termination for five years."
+    contract_type: "SOFTWARE_LICENSE"
+
+  - id: "q005"
+    question: "What warranties does the licensor provide for the software?"
+    ground_truth_answer: "No warranties. The software is provided as-is and the licensor disclaims all warranties including merchantability and fitness for purpose."
+    ground_truth_context: "THE SOFTWARE IS PROVIDED AS IS WITHOUT WARRANTY OF ANY KIND. LICENSOR DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE."
+    contract_type: "SOFTWARE_LICENSE"
+
+  - id: "q006"
+    question: "What is the liability cap in the software license agreement?"
+    ground_truth_answer: "The licensor's total liability shall not exceed the fees paid in the prior twelve months."
+    ground_truth_context: "IN NO EVENT SHALL LICENSOR BE LIABLE FOR INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES. LICENSOR TOTAL LIABILITY SHALL NOT EXCEED FEES PAID IN THE PRIOR TWELVE MONTHS."
+    contract_type: "SOFTWARE_LICENSE"
+
+  # ── CONSULTING SERVICES contracts ──────────────────────────────────
+  - id: "q007"
+    question: "What is the hourly rate for consulting services?"
+    ground_truth_answer: "Two hundred fifty dollars per hour."
+    ground_truth_context: "Client shall pay Consultant at the rate of two hundred fifty dollars per hour."
+    contract_type: "CONSULTING_SERVICES"
+
+  - id: "q008"
+    question: "What is the payment term for consulting invoices?"
+    ground_truth_answer: "Client shall pay all undisputed amounts within thirty days of receipt of each invoice."
+    ground_truth_context: "Consultant shall submit invoices monthly. Client shall pay all undisputed amounts within thirty days of receipt of each invoice."
+    contract_type: "CONSULTING_SERVICES"
+
+  - id: "q009"
+    question: "Is the consultant an employee of the client?"
+    ground_truth_answer: "No. The consultant is an independent contractor, not an employee."
+    ground_truth_context: "Consultant is an independent contractor and not an employee of Client. Consultant is solely responsible for all taxes and insurance."
+    contract_type: "CONSULTING_SERVICES"
+
+  - id: "q010"
+    question: "Who owns the work product created during the consulting engagement?"
+    ground_truth_answer: "The client owns all work product. It is treated as work made for hire and assigned to the client upon full payment."
+    ground_truth_context: "All work product created by Consultant in performance of Services shall be work made for hire. To the extent any Work Product does not qualify as work made for hire, Consultant assigns all right, title, and interest to Client upon full payment."
+    contract_type: "CONSULTING_SERVICES"
+
+  - id: "q011"
+    question: "What is the non-solicitation period for employees after the consulting agreement ends?"
+    ground_truth_answer: "Twelve months after the termination of the agreement."
+    ground_truth_context: "During the term and for twelve months thereafter, Consultant shall not solicit or hire any employee of Client without prior written consent."
+    contract_type: "CONSULTING_SERVICES"
+
+  - id: "q012"
+    question: "How many days notice is required to terminate the consulting agreement?"
+    ground_truth_answer: "Fifteen days written notice."
+    ground_truth_context: "Either party may terminate upon fifteen days written notice to the other party."
+    contract_type: "CONSULTING_SERVICES"
+
+  - id: "q013"
+    question: "Under what circumstances can the client terminate the consulting agreement immediately?"
+    ground_truth_answer: "The client can terminate immediately for cause if the consultant materially breaches and fails to cure the breach within five business days of written notice."
+    ground_truth_context: "Client may terminate immediately for cause if Consultant materially breaches and fails to cure such breach within five business days of written notice."
+    contract_type: "CONSULTING_SERVICES"
+
+  # ── NONDISCLOSURE contracts ────────────────────────────────────────
+  - id: "q014"
+    question: "What is the definition of Confidential Information in the NDA?"
+    ground_truth_answer: "Any information disclosed by either party, directly or indirectly, in writing or orally, that is designated as confidential or that reasonably should be understood to be confidential."
+    ground_truth_context: "Confidential Information means any information disclosed by either Party to the other, directly or indirectly, in writing or orally, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and circumstances of disclosure."
+    contract_type: "NONDISCLOSURE"
+
+  - id: "q015"
+    question: "What are the main obligations of the receiving party under the NDA?"
+    ground_truth_answer: "Hold confidential information in strict confidence, not disclose to third parties without consent, and use it only for evaluating a potential business relationship."
+    ground_truth_context: "Each Party agrees to: (a) hold Confidential Information in strict confidence; (b) not disclose to third parties without prior written consent; (c) use solely for evaluating a potential business relationship."
+    contract_type: "NONDISCLOSURE"
+
+  - id: "q016"
+    question: "What information is excluded from the NDA confidentiality obligations?"
+    ground_truth_answer: "Information that is publicly known through no breach, was already in possession before disclosure, is independently developed, or is required to be disclosed by law."
+    ground_truth_context: "Confidential Information does not include information that: (a) is publicly known through no breach; (b) was rightfully in possession before disclosure; (c) is independently developed without use of Confidential Information; (d) is required to be disclosed by law."
+    contract_type: "NONDISCLOSURE"
+
+  - id: "q017"
+    question: "What must the receiving party do with confidential information upon request?"
+    ground_truth_answer: "Promptly return or destroy all confidential information including all copies, notes, and summaries."
+    ground_truth_context: "Upon request by the disclosing Party, the receiving Party shall promptly return or destroy all Confidential Information, including all copies, notes, and summaries."
+    contract_type: "NONDISCLOSURE"
+
+  - id: "q018"
+    question: "How long does the NDA remain in effect?"
+    ground_truth_answer: "Three years from execution, with obligations surviving for five years from the date of initial disclosure."
+    ground_truth_context: "This Agreement remains in effect for three years from execution. The obligations with respect to Confidential Information disclosed during the term shall survive for five years from the date of initial disclosure."
+    contract_type: "NONDISCLOSURE"
+
+  - id: "q019"
+    question: "What remedies are available for breach of the NDA?"
+    ground_truth_answer: "Either party may seek injunctive or equitable relief in addition to all other remedies at law, without the requirement of posting bond."
+    ground_truth_context: "The Parties acknowledge that breach of this Agreement may cause irreparable harm for which monetary damages would be inadequate. Accordingly, either Party may seek injunctive or other equitable relief without the requirement of posting bond."
+    contract_type: "NONDISCLOSURE"
+
+  # ── EMPLOYMENT contracts ───────────────────────────────────────────
+  - id: "q020"
+    question: "What is the base salary in the employment agreement?"
+    ground_truth_answer: "One hundred twenty thousand dollars per year, payable bi-weekly."
+    ground_truth_context: "Employer shall pay Employee a base salary of one hundred twenty thousand dollars per year, payable bi-weekly."
+    contract_type: "EMPLOYMENT"
+
+  - id: "q021"
+    question: "What benefits is the employee entitled to?"
+    ground_truth_answer: "Health insurance, dental insurance, vision insurance, and 401k plan with employer matching."
+    ground_truth_context: "Employee shall be entitled to participate in all benefit plans maintained by Employer, including health insurance, dental insurance, vision insurance, and 401k plan with employer matching."
+    contract_type: "EMPLOYMENT"
+
+  - id: "q022"
+    question: "What type of employment relationship is established in the employment agreement?"
+    ground_truth_answer: "At-will employment, terminable by either party at any time with two weeks written notice."
+    ground_truth_context: "Employee's employment is at-will and may be terminated by either party at any time, with or without cause, upon two weeks written notice."
+    contract_type: "EMPLOYMENT"
+
+  - id: "q023"
+    question: "Who owns inventions created by the employee during employment?"
+    ground_truth_answer: "The employer owns all inventions created during employment that relate to the employer's business."
+    ground_truth_context: "All inventions, works of authorship, software, and other intellectual property created by Employee during employment that relate to Employer's business or use Employer's resources shall be owned exclusively by Employer."
+    contract_type: "EMPLOYMENT"
+
+  # ── LEASE contracts ────────────────────────────────────────────────
+  - id: "q024"
+    question: "What is the monthly base rent in the commercial lease?"
+    ground_truth_answer: "Eight thousand dollars per month."
+    ground_truth_context: "Tenant shall pay monthly base rent of eight thousand dollars, due on the first day of each calendar month."
+    contract_type: "LEASE"
+
+  - id: "q025"
+    question: "What is the annual rent increase under the commercial lease?"
+    ground_truth_answer: "Three percent annually on each anniversary of the commencement date."
+    ground_truth_context: "Base rent shall increase by three percent annually on each anniversary of the commencement date."
+    contract_type: "LEASE"
+
+  - id: "q026"
+    question: "What is the late payment penalty in the commercial lease?"
+    ground_truth_answer: "Five percent of the monthly rent after a five-day grace period."
+    ground_truth_context: "Late payments shall incur a penalty of five percent of the monthly rent after a five-day grace period."
+    contract_type: "LEASE"
+
+  - id: "q027"
+    question: "How much is the security deposit in the commercial lease?"
+    ground_truth_answer: "Sixteen thousand dollars."
+    ground_truth_context: "Tenant shall deposit sixteen thousand dollars as a security deposit upon execution."
+    contract_type: "LEASE"
+
+  - id: "q028"
+    question: "When must the security deposit be returned after lease termination?"
+    ground_truth_answer: "Within thirty days after lease termination, less any amounts for unpaid rent or damages beyond normal wear and tear."
+    ground_truth_context: "Landlord shall return the deposit within thirty days after lease termination, less any amounts applied to unpaid rent or damages beyond normal wear and tear."
+    contract_type: "LEASE"
+
+  - id: "q029"
+    question: "What insurance must the tenant maintain under the commercial lease?"
+    ground_truth_answer: "Commercial general liability insurance with minimum coverage of two million dollars per occurrence."
+    ground_truth_context: "Tenant shall maintain commercial general liability insurance with minimum coverage of two million dollars per occurrence throughout the lease term."
+    contract_type: "LEASE"
+
+  - id: "q030"
+    question: "Can the tenant sublet the premises without permission?"
+    ground_truth_answer: "No. The tenant cannot assign the lease or sublet the premises without prior written consent of the landlord."
+    ground_truth_context: "Tenant shall not assign this lease or sublet the premises without prior written consent of the Landlord, which shall not be unreasonably withheld for non-structural improvements."
+    contract_type: "LEASE"
