@@ -15,7 +15,7 @@ Build fails if this threshold is not met.
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import yaml
@@ -165,7 +165,7 @@ def run_ragas_evaluation(
         "answer_relevancy": float(result["answer_relevancy"]),
         "context_recall": float(result["context_recall"]),
         "context_precision": float(result["context_precision"]),
-        "evaluated_at": datetime.now(timezone.utc).isoformat(),
+        "evaluated_at": datetime.now(UTC).isoformat(),
         "sample_size": sample_size,
         "gate_faithfulness": FAITHFULNESS_GATE,
         "gate_passed": float(result["faithfulness"]) >= FAITHFULNESS_GATE,

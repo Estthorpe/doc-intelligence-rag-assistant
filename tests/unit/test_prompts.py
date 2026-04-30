@@ -9,6 +9,7 @@ break the expected structure without requiring API calls.
 from __future__ import annotations
 
 import pytest
+
 from src.generation.prompts import format_prompt, load_prompt
 
 
