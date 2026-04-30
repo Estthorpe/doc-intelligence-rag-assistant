@@ -46,10 +46,6 @@ source = ["src"]
 omit = ["*/tests/*", "*/venv/*"]
 
 [[tool.mypy.overrides]]
-module = "src.config.logging_config"
-disable_error_codes = ["return-value"]
-
-[[tool.mypy.overrides]]
 module = [
     "src.config.logging_config",
     "src.config.settings",
@@ -71,9 +67,8 @@ module = [
     "src.generation.prompts",
     "src.ui.streamlit_app",
     "src.evaluation.ragas_runner",
+    "src.agents.knowledge_ops_agent",
+    "src.agents.schemas",
+    "src.agents.tools",
 ]
 ignore_errors = true
-
-[[tool.mypy.overrides]]
-module = "src.config.settings"
-disable_error_codes = ["call-arg"]
