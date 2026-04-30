@@ -69,6 +69,7 @@ module = [
     "src.cache.semantic_cache",
     "src.generation.generator",
     "src.generation.prompts",
+    "src.ui.streamlit_app",
 ]
 ignore_errors = true
 
